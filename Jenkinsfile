@@ -18,7 +18,8 @@ pipeline {
         echo '********* Build Stage Started **********'
         pip3 install -r requirements.txt
         
-pip3 install pyinstaller
+python3 -m PyInstaller --onefile app.py
+
 
         pyinstaller --onefile app.py
         echo '********* Build Stage Finished **********'
@@ -97,4 +98,5 @@ stage('Deployment Stage'){
         }
     }
 }
+
 
