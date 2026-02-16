@@ -17,6 +17,9 @@ pipeline {
         sh '''
         echo '********* Build Stage Started **********'
         pip3 install -r requirements.txt
+        
+pip3 install pyinstaller
+
         pyinstaller --onefile app.py
         echo '********* Build Stage Finished **********'
         '''
@@ -94,3 +97,4 @@ stage('Deployment Stage'){
         }
     }
 }
+
