@@ -21,7 +21,6 @@ pipeline {
         python3 -m pip install -r requirements.txt
         python3 -m pip install pyinstaller
 
-        # IMPORTANT: use python -m PyInstaller (works on Jenkins Mac)
         python3 -m PyInstaller --onefile app.py
 
         echo "Build Finished"
@@ -39,10 +38,10 @@ pipeline {
       }
     }
 
-    stage('Run App (Deployment Demo)') {
+    stage('Run App Demo') {
       steps {
         sh '''
-        echo "Running app for demo..."
+        echo "Running app briefly..."
         timeout 10 python3 app.py || true
         '''
       }
@@ -54,11 +53,9 @@ pipeline {
     always {
       echo 'Pipeline finished'
 
-      # Archive ANY built file (Mac builds no .exe)
       archiveArtifacts artifacts: 'dist/*', fingerprint: true, allowEmptyArchive: true
 
-      # Avoid junit crash if reports missing
-      echo 'Skipping junit report (no XML generated)'
+      echo 'Skipping junit report'
     }
 
     success {
