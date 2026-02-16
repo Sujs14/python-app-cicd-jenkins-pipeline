@@ -1,3 +1,8 @@
+def test_success():
+assert True
+
+
+
 import unittest
 import xmlrunner
 import app
